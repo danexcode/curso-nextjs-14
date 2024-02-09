@@ -1,9 +1,6 @@
 import { ProductsWrapper } from "app/components/Store/ProductsWrapper";
-import {
-  getCollectionProducts,
-  getCollections,
-} from "app/services/shopify/collections";
-import { getProducts } from "app/services/shopify/products";
+import { CategoryService } from "app/services/myCommerce/categories";
+import { ProductsService } from "app/services/myCommerce/products";
 
 interface CategoryProps {
   params: {
@@ -13,17 +10,19 @@ interface CategoryProps {
 }
 
 export default async function Category(props: CategoryProps) {
+  const categoryService = new CategoryService() ;
+  const productService = new ProductsService();
   let products = [];
   let { categories } = props.params;
-  const collections = await getCollections();
+  const collections = await categoryService.find();
   
-  if (categories) {
-    const selectedCollectionId = collections.find(
-      (item: Collection) => item.handle === categories[0]
+  if (categories && collections) {
+    const selectedCollectionId = collections?.find(
+      (item: CollectionType) => item.name === categories[0]
     ).id;
-    products = await getCollectionProducts(selectedCollectionId);
+    products = await productService.find() //getCollectionProducts(selectedCollectionId);
   } else {
-    products = await getProducts();
+    products = await productService.find();
   }
 
   return <ProductsWrapper products={products} />;

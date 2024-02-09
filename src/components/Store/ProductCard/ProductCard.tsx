@@ -8,18 +8,18 @@ interface ProductCardInterface {
 
 export const ProductCard = ({ product }: ProductCardInterface) => {
   return (
-    <Link href={`/product/${product.handle}?id=${product.id}`} className={styles.ProductCard__link}>
+    <Link href={`/product/detail?id=${product.id}`} className={styles.ProductCard__link}>
       <article className={styles.ProductCard}>
         <Image
           src={product.image}
-          alt={product.title}
+          alt={product.name}
           quality={80}
           height={320}
           width={320}
           loading="eager"
         />
         <div className={styles.ProductCard__info}>
-          <h3>{product.title}</h3>
+          <h3>{product.name}</h3>
         </div>
         <span className={styles.ProductCard__priceTag}>${product.price} USD</span>
       </article>

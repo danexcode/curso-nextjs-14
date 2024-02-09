@@ -17,7 +17,7 @@ export const ProductViewItemsOrder = ({ maxQuantity, product }: ProductViewItems
   const handleAddToCart = (event: SyntheticEvent) => {
     event.preventDefault();
     addToCart({
-      title: product.title,
+      name: product.name,
       price: product.price,
       quantity: counter,
       id: product.id,

@@ -14,5 +14,11 @@ export const myCommerceUrls = {
   },
   orders: {
     create: `${env.myCommerce.hostname}/orders`
+  },
+  products: {
+    findAll: `${env.myCommerce.hostname}/products`
+  },
+  categories: {
+    findAll: `${env.myCommerce.hostname}/categories`
   }
 }

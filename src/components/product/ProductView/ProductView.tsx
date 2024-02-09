@@ -17,19 +17,19 @@ export const ProductView = ({ product }: ProductViewProps) => {
           width={500}
           height={500}
           quality={80}
-          alt={product.title}
+          alt={product.name}
         />
       </section>
       <section className={styles.ProductView__info}>
-        <h1 className={styles.ProductView__info__title}>{product.title}</h1>
-        <p className={styles.ProductView__info__category}>{product.tags}</p>
+        <h1 className={styles.ProductView__info__title}>{product.name}</h1>
+        <p className={styles.ProductView__info__category}>{["super"]}</p>
         <SanitizeHTML tag="p" className={styles.ProductView__info__description}>
           {product.description}
         </SanitizeHTML>
         <span className={styles.ProductView__info__price}>
           $ {product.price}
         </span>
-        <ProductViewItemsOrder maxQuantity={product.quantity} product={product}/>
+        <ProductViewItemsOrder maxQuantity={product.stock} product={product}/>
       </section>
     </main>
   );

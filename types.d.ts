@@ -29,13 +29,18 @@ interface CreateUserDto {
 
 type ProductType = {
   id: string;
-  title: string;
+  name: string;
   description: string;
   price: number;
   image: string;
-  quantity: number;
-  handle: string;
-  tags: string;
+  stock: number;
+};
+
+type CollectionType = {
+  id: string;
+  name: string;
+  image: string;
+  description: string;
 };
 
 interface Product { 
@@ -70,7 +75,7 @@ interface Product {
 }
 
 type CartItem = {
-  title: string;
+  name: string;
   price: number;
   quantity: number;
   id: string;

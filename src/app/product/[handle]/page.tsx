@@ -1,6 +1,8 @@
 import { redirect } from "next/navigation";
 import { ProductView } from "app/components/product/ProductView";
-import { getProducts } from "app/services/shopify/products";
+import { ProductsService } from "app/services/myCommerce/products";
+
+const service = new ProductsService();
 
 interface ProductPageProps {
   searchParams: {
@@ -10,13 +12,12 @@ interface ProductPageProps {
 
 export async function generateMetadata({ searchParams }: ProductPageProps) {
   const id = searchParams.id;
-  const products = await getProducts(id);
-  const product = products[0];
+  const product: ProductType = await service.findById(id);
 
   return {
-    title: product.title,
+    title: product.name,
     description: product.description,
-    keywords: product.tags,
+    keywords: ['super'],
     openGraph: {
       images: [product.image]
     }
@@ -25,8 +26,7 @@ export async function generateMetadata({ searchParams }: ProductPageProps) {
 
 export default async function ProductPage(props: ProductPageProps) {
   const id = props.searchParams.id;
-  const products = await getProducts(id);
-  const product = products[0];
+  const product = await service.findById(id);
 
   if (!id) {
     redirect("/store");

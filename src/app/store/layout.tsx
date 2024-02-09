@@ -1,10 +1,11 @@
 import Link from "next/link"
 import { ChatLink } from "app/components/Store/ChatLink"
-import { getCollections } from "app/services/shopify/collections"
+import { CategoryService } from "app/services/myCommerce/categories"
 import styles from './StoreLayout.module.sass'
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
-  const collections = await getCollections()
+  const service = new CategoryService();
+  const collections = await service.find();
 
   return (
     <main className={styles.StoreLayout}>
@@ -12,9 +13,9 @@ export default async function Layout({ children }: { children: React.ReactNode }
       <nav>
         <ul className={styles.StoreLayout__list}>
           {
-            collections?.map((collection: any) => (
-              <Link key={collection.id} href={'/store/' + collection.handle} className={styles.StoreLayout__chip}>
-                {collection.title}
+            collections?.map((collection: CollectionType) => (
+              <Link key={collection.id} href={'/store/' + collection.name} className={styles.StoreLayout__chip}>
+                {collection.name}
               </Link>
             ))
           }

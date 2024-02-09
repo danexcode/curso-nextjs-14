@@ -2,6 +2,7 @@
 import { handleLogin } from "app/actions";
 import styles from "./LoginForm.module.sass";
 import { FormEvent, FormEventHandler, FormHTMLAttributes } from "react";
+import Link from "next/link";
 
 export const LoginForm = () => {
   const handleSubmit = async (event: {
@@ -20,6 +21,7 @@ export const LoginForm = () => {
       <form className={styles.NewAccountForm__form} onSubmit={handleSubmit}>
         <input type="text" name="email" placeholder="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
         <input type="password" name="password" placeholder="password" />
+        <p>Doesn't have an account? <Link href={'/signup'}>Sign up</Link></p>
         <input type="submit" name="submit" value="Login" />
       </form>
     </div>

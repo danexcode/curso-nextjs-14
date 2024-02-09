@@ -9,7 +9,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "Mising path or token" }, { status: 400 });
   }
 
-  if (token !== env.CACHE_TOKEN) {
+  if (token !== env.shopify.CACHE_TOKEN) { 
     return Response.json({ error: "Invalid token" }, { status: 401 });
   }
 

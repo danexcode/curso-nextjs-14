@@ -3,7 +3,7 @@ import { shopifyUrls } from "./urls";
 
 export const getProducts = async (
   id?: string
-): Promise<ProductType[]> => {
+) => {
   try {
     const apiUrl = id
       ? `${shopifyUrls.products.all}?ids=${id}`

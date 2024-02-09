@@ -4,7 +4,11 @@ import styles from "./LoginForm.module.sass";
 import { FormEvent, FormEventHandler, FormHTMLAttributes } from "react";
 
 export const LoginForm = () => {
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: {
+    target: any;
+    preventDefault: () => void;
+  
+  }) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     await handleLogin(formData);

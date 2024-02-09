@@ -1,58 +1,10 @@
 import Image from "next/image";
+import { getMainProducts } from "app/services/shopify/products";
 import styles from "./MainProducts.module.sass";
 
-interface Product { 
-  id: number; 
-  title: string; 
-  body_html: string; 
-  vendor: string; 
-  product_type: string; 
-  created_at: string; handle: 
-  string; updated_at: string; 
-  published_at: string; 
-  template_suffix: null | string; 
-  published_scope: string; tags: string; 
-  status: string; admin_graphql_api_id: string; 
-  variants: Array<{ /* Detalles de las opciones */ }>; 
-  // Necesitarías definir el tipo para las opciones 
-  images: Array<{ /* Detalles de las imágenes */ }>; 
-  // Necesitarías definir el tipo para las imágenes 
-  image: { 
-    id: number; 
-    alt: null | string; 
-    position: number; 
-    product_id: number; 
-    created_at: string; 
-    updated_at: string; 
-    admin_graphql_api_id: string; 
-    width: number; 
-    height: number; 
-    src: string; 
-    variant_ids: number[]; 
-  }; 
-}
-
-
-const getProducts = async () => {
-  try {
-    const response = await fetch(
-      `${process.env.SHOPIFY_HOSTNAME}/admin/api/2023-10/products.json`,
-      {
-        headers: new Headers({
-          "X-Shopify-Access-Token": process.env.SHOPIFY_API_KEY || "",
-        }),
-      }
-    );
-    const { products } = await response.json();
-    return products;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const MainProducts = async () => {
-  const products = await getProducts();
-  console.log(products);
+  const products = await getMainProducts();
+
   return (
     <section className={styles.MainProducts}>
       <h3>✨ New products released!</h3>
